@@ -1,7 +1,7 @@
 <!-- Please do not change this html logo with link -->
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
-# Update the title for [ADD_REPO_NAME_HERE] here
+# Windowed Peak Detector with the PIC18F16Q41
 
 <!-- This is where the introduction to the example goes, including mentioning the peripherals used -->
 
