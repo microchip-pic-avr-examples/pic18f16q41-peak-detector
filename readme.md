@@ -2,39 +2,57 @@
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
 # Windowed Peak Detector with the PIC18F16Q41
-
-<!-- This is where the introduction to the example goes, including mentioning the peripherals used -->
+The operational amplifier (OPA) module, along with a comparator, a digital-to-analog converter (DAC), and the analog-to-digital converter with computation (ADCC) can be used to implement a windowed peak detector.
 
 ## Related Documentation
 
-<!-- Any information about an application note or tech brief can be linked here. Use unbreakable links!
-     In addition a link to the device family landing page and relevant peripheral pages as well:
-     - [AN3381 - Brushless DC Fan Speed Control Using Temperature Input and Tachometer Feedback](https://microchip.com/00003381/)
-     - [PIC18F-Q10 Family Product Page](https://www.microchip.com/design-centers/8-bit/pic-mcus/device-selection/pic18f-q10-product-family) -->
+<a href="https://www.microchip.com/wwwproducts/en/PIC18F16Q41">PIC18F16Q41 Product Information</a><br>
+TBxxxx, "Using Operational Amplifiers in PIC16 and PIC18"<br>
+TBxxxx, "Optimizing Internal Operational Amplifiers for Analog Signal Conditioning"<br>
+ANxxxx, "Analog Sensor Measurement and Acquisition"
 
 ## Software Used
 
-<!-- All software used in this example must be listed here. Use unbreakable links!
-     - MPLAB® X IDE 5.30 or newer [(microchip.com/mplab/mplab-x-ide)](http://www.microchip.com/mplab/mplab-x-ide)
-     - MPLAB® XC8 2.10 or a newer compiler [(microchip.com/mplab/compilers)](http://www.microchip.com/mplab/compilers)
-     - MPLAB® Code Configurator (MCC) 3.95.0 or newer [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
-     - MPLAB® Code Configurator (MCC) Device Libraries PIC10 / PIC12 / PIC16 / PIC18 MCUs [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
-     - Microchip PIC18F-Q Series Device Support (1.4.109) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/) -->
+* <a href="http://www.microchip.com/mplab/mplab-x-ide">MPLAB® IDE 5.40 or newer</a>
+* <a href="https://www.microchip.com/mplab/compilers">Microchip XC8 Compiler 2.20 or newer</a>
+* <a href="https://www.microchip.com/mplab/mplab-code-configurator">MPLAB® Code Configurator (MCC) 3.95.0 or newer</a>
 
 ## Hardware Used
 
-<!-- All hardware used in this example must be listed here. Use unbreakable links!
-     - PIC18F47Q10 Curiosity Nano [(DM182029)](https://www.microchip.com/Developmenttools/ProductDetails/DM182029)
-     - Curiosity Nano Base for Click boards™ [(AC164162)](https://www.microchip.com/Developmenttools/ProductDetails/AC164162)
-     - POT Click board™ [(MIKROE-3402)](https://www.mikroe.com/pot-click) -->
+* <a href="https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM164137"> Microchip Curiosity Development Board (DM164137) </a>
+* *(Optional)* Signal Source
 
 ## Setup
 
-<!-- Explain how to connect hardware and set up software. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
+<img src="images/diagram.png" alt="schematic" width="500px" /><br>
+
+| Pin | Function
+| --- | --------
+| RC2 | OPA Module Output
+| RC0 | Potentiometer Output on Curiosity
+| RB7 | UART Output, 9600 BAUD
+| RB5 | Signal Input (connect a signal or RC0 to this input)
+
+#### Special Pins
+
+| Pin | Function
+| --- | --------
+| TX  | Curiosity UART to USB Transmit
 
 ## Operation
+The windowed peak detector is a state machine that detects signals that exceed a set level (via DAC2). When a signal is above the set level, the ADCC continuously samples the output of the OPA module, and interrupts if the measured signal subtracted from the last peak value is greater than the 0. In this case, the measured signal is stored in the setpoint register of the ADCC and begins a new conversion. When the signal falls below the threshold, the ADCC stops and the peak value recorded is printed from the setpoint register.
 
-<!-- Explain how to operate the example. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
+
+#### Acquisition State Machine
+<img src="images/stateMachine.png" alt="state machine drawing" width="400px" /><br>
+
+
+#### Flowchart
+<img src="images/flowchart.png" alt="flowchart" width="500px" /><br>
+
+
+#### Signal Inputs
+In the default configuration, the OPA module is configured as a unity gain buffer, which has a gain of 1. To enable smaller input signals (such as those from sensors), the OPA module can be reconfigured in Microchip Code Configurator (MCC) to a higher gain using the internal resistor ladder.
 
 ## Summary
 
