@@ -57,7 +57,7 @@ The program stays in the RUNNING state until the signal falls below the threshol
 (Note: Printing through UART is interrupt driven, making it asynchronous.)
 
 #### Flowchart
-<img src="images/flowchart.png" alt="flowchart" width="500px" /><br>
+<img src="images/flowChart.png" alt="flowchart" width="500px" /><br>
 
 
 #### Signal Inputs
