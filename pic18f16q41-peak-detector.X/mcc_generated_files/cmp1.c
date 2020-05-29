@@ -103,7 +103,6 @@ void CMP1_ISR(void)
         setState(PK_OPEN);               // Indicate the window is open
         ADSTPT = 0x00;                   // Clear the max
         ADCC_StartConversion(0x8D);
-        //ADCC_StartConversion(OpAmp_OUT);
     }
     else
     {
