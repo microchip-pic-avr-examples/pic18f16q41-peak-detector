@@ -57,7 +57,7 @@ void main(void)
     
     INTERRUPT_GlobalInterruptEnable();
 
-    setState(PK_WAIT);
+    setState(PK_WAITING);
     
     while (1)
     {
@@ -88,7 +88,7 @@ void main(void)
             END_OF_LINE;
             
             // Return the state machine to WAIT
-            setState(PK_WAIT);
+            setState(PK_WAITING);
         }
     }
 }

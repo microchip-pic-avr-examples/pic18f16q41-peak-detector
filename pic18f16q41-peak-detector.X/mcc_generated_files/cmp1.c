@@ -102,7 +102,8 @@ void CMP1_ISR(void)
         WindowOpen_LED_LAT = 1;          // Turn on an LED
         setState(PK_OPEN);               // Indicate the window is open
         ADSTPT = 0x00;                   // Clear the max
-        ADCC_StartConversion(OpAmp_OUT);
+        ADCC_StartConversion(0x8D);
+        //ADCC_StartConversion(OpAmp_OUT);
     }
     else
     {

@@ -15,7 +15,7 @@ extern "C" {
     /**
      *  Peak detecting state machine states
      */
-    typedef enum {PK_WAIT = 0, PK_OPEN, PK_RUNNING, PK_DONE} PEAK_STATES;
+    typedef enum {PK_WAITING = 0, PK_OPEN, PK_RUNNING, PK_DONE} PEAK_STATES;
         
     /**
      * <b><FONT COLOR=BLUE>void</FONT> setState(<FONT COLOR=BLUE>PEAK_STATES</FONT> state)</B>

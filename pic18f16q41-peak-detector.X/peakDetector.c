@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <xc.h>
 
-static volatile PEAK_STATES peakReady = PK_WAIT;
+static volatile PEAK_STATES peakReady = PK_WAITING;
 
 // Returns the remainder, and subtracts from the numerator during the division.
 uint16_t inline fastDivide(uint16_t* numer, uint16_t divisor)
@@ -42,7 +42,7 @@ void sendPeakValue(void)
         sendString("[WARNING] Peak exceeds ADC measurement range", 1);
     }
     
-    sendString("Maximum Value: ~", 0);
+    sendString("Peak Input: ", 0);
     
     if (adc_peak >= 1000)
     {

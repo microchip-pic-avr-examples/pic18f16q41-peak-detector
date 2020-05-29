@@ -95,8 +95,8 @@ void ADCC_Initialize(void)
     ADCON1 = 0x00;
     // ADCRS 0; ADMD Basic_mode; ADACLR disabled; ADPSIS RES; 
     ADCON2 = 0x00;
-    // ADCALC Actual result vs setpoint; ADTMD ADERR > ADUTH; ADSOI ADGO not cleared; 
-    ADCON3 = 0x16;
+    // ADCALC Actual result vs setpoint; ADTMD ADERR > ADUTH; ADSOI ADGO is cleared; 
+    ADCON3 = 0x1E;
     // ADMATH registers not updated; 
     ADSTAT = 0x00;
     // ADNREF VSS; ADPREF FVR; 
@@ -317,12 +317,13 @@ void ADCC_SetADTIInterruptHandler(void (* InterruptHandler)(void)){
     ADCC_ADTI_InterruptHandler = InterruptHandler;
 }
 void ADCC_DefaultInterruptHandler(void){
-    
     // Set new max
     ADCC_DefineSetPoint(ADRES);
     
     // Clear threshold flag
     ADSTATbits.UTHR = 0;
+    
+    ADCON0bits.ADGO = 1;
 }
 /**
  End of File
