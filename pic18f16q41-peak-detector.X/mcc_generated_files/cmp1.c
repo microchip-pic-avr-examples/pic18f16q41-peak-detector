@@ -53,8 +53,8 @@
 #include "cmp1.h"
 
 #include "../peakDetector.h"
-#include "./pin_manager.h"
-#include "adcc.h"
+#include "./mcc.h"
+
 /**
   Section: CMP1 APIs
 */
@@ -96,22 +96,11 @@ void CMP1_ISR(void)
 {
     if (CM1CON1bits.INTP)
     {
-        CM1CON1bits.INTP = 0;
-        CM1CON1bits.INTN = 1;
-
-        WindowOpen_LED_LAT = 1;          // Turn on an LED
-        setState(PK_OPEN);               // Indicate the window is open
-        ADSTPT = 0x00;                   // Clear the max
-        ADCC_StartConversion(0x8D);
+        positiveEdgeAction();
     }
     else
     {
-        CM1CON1bits.INTN = 0;
-        CM1CON1bits.INTP = 1;
-        
-        WindowOpen_LED_LAT = 0;         // Turn off an LED
-        ADCC_StopConversion();          // Abort the conversion
-        setState(PK_DONE);              // Indicate that the peak can be printed now
+        negativeEdgeAction();
     }
     // Clear the CMP1 interrupt flag
     PIR1bits.C1IF = 0;

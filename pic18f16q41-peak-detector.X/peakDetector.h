@@ -42,6 +42,22 @@ extern "C" {
      */
     void sendPeakValue(void);
 
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> negativeEdgeAction(<FONT COLOR=BLUE>void</FONT>)</B>
+     * 
+     *  This function is called by the ISR when the signal falls below the threshold.
+     *  Inside, this function sets up the positive edge events and disables the ADCC.
+     */
+    void negativeEdgeAction(void);
+
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> positiveEdgeAction(<FONT COLOR=BLUE>void</FONT>)</B>
+     * 
+     *  This function is called by the ISR (or main) when a signal rises above the threshold.
+     *  Inside, this function sets up the negative edge events and enables the ADCC.
+     */
+    void positiveEdgeAction(void);
+    
 #ifdef	__cplusplus
 }
 #endif

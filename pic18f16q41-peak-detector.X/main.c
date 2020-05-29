@@ -55,9 +55,17 @@ void main(void)
     // DAC is not usually initalized before CMP, clear edge flags
     PIR1bits.C1IF = 0;
     
-    INTERRUPT_GlobalInterruptEnable();
-
-    setState(PK_WAITING);
+    INTERRUPT_GlobalInterruptEnable(); 
+    
+    // If not above threshold, then startup normally
+    if (!CMP1_GetOutputStatus())
+        setState(PK_WAITING);
+    else
+    {
+        // Threshold is exceeded, run trigger that was skipped
+        setState(PK_OPEN);
+        positiveEdgeAction();
+    }    
     
     while (1)
     {

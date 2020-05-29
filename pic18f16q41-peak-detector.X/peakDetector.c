@@ -1,6 +1,8 @@
 #include "peakDetector.h"
 #include "utility.h"
 
+#include "./mcc_generated_files/mcc.h"
+
 #include <stdint.h>
 #include <xc.h>
 
@@ -90,4 +92,25 @@ void sendPeakValue(void)
         sendString("mV", 1);
         
     }
+}
+
+void negativeEdgeAction(void)
+{
+    CM1CON1bits.INTN = 0;
+    CM1CON1bits.INTP = 1;
+
+    WindowOpen_LED_LAT = 0;         // Turn off an LED
+    ADCC_StopConversion();          // Abort the conversion
+    setState(PK_DONE);              // Indicate that the peak can be printed now
+}
+
+void positiveEdgeAction(void)
+{
+    CM1CON1bits.INTP = 0;
+    CM1CON1bits.INTN = 1;
+
+    WindowOpen_LED_LAT = 1;          // Turn on an LED
+    setState(PK_OPEN);               // Indicate the window is open
+    ADSTPT = 0x00;                   // Clear the max
+    ADCC_StartConversion(0x8D);
 }
