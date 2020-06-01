@@ -2,7 +2,7 @@
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
 # Windowed Peak Detector with the PIC18F16Q41
-The operational amplifier (OPA) module, along with a comparator, a digital-to-analog converter (DAC), and the analog-to-digital converter with computation (ADCC) can be used to implement a windowed peak detector.
+The operational amplifier (OPA) module, along with a comparator, a digital-to-analog converter (DAC), and the analog-to-digital converter with computation (ADCC) can be used to implement a windowed peak detector. The windowed peak detector finds the highest voltage within a specific region of time or values, in this case the window is defined by a voltage threshold.
 
 ## Related Documentation
 
@@ -50,7 +50,7 @@ The windowed peak detector is a state machine that detects and measures signals 
 #### Acquisition State Machine
 <img src="images/stateMachine.png" alt="state machine drawing" width="400px" /><br>
 
-On power-up the program starts in the WAITING state. In this state, the ADCC is off. When the output of the OPA module exceeds the threshold, then the program transitions to the OPEN state. In this state, the program prints the message "Peak Window Open" and moves to RUNNING. If a fast falling edge occurs before the transition to RUNNING, then the program will immediately switch to the DONE state and print the ending messages. Fast edges may be missed due to the speed of the edge.  
+On power-up the program starts in the WAITING state. In this state, the ADCC is off. When the output of the OPA module exceeds the threshold, then the program transitions to the OPEN state. In this state, the program prints the message "Peak Window Open" and moves to RUNNING. If a fast falling edge occurs before the transition to RUNNING, then the program will immediately switch to the DONE state and print the ending messages.
 
 The program stays in the RUNNING state until the signal falls below the threshold. At this point, the program moves to DONE, and prints the peak value stored in the setpoint register of the ADCC.
 
@@ -60,8 +60,16 @@ The program stays in the RUNNING state until the signal falls below the threshol
 <img src="images/flowChart.png" alt="flowchart" width="500px" /><br>
 
 
-#### Signal Inputs
-In the default configuration, the OPA module is configured as a unity gain buffer, which has a gain of 1. To enable smaller input signals (such as those from sensors), the OPA module can be reconfigured in Microchip Code Configurator (MCC) to a higher gain using the internal resistor ladder.
+## Signal Inputs
+In the default configuration, the OPA module is configured as a unity gain buffer, which has a gain of 1. To enable smaller input signals (such as those from sensors), the OPA module can be reconfigured in Microchip Code Configurator (MCC) to a higher gain using the internal resistor ladder/
+
+**Important: The BW of the OPA module should be greater than the sampling frequency!**
+
+#### Input range
+The output of the OPA module should be kept below 4.096V, which is the limit of the ADCC's voltage reference. Using other voltage references with the ADCC will require changes to the way results are printed, as the output function expects 1mV per bit from the measurement. 
+
+#### Frequency Limits
+The Nyquist frequency limits the frequency range of this example to 1/2 of the sampling rate. By default, the total conversion time is 19.55us, which is an effective sampling rate of 51.5kHz. To remove aliasing, a filter on the input to attenuate and reject frequencies above 25.75kHz is recommended.
 
 ## Summary
-Using the peripherals included with the PIC18F16Q41, it is possible to do peak signal detection.
+Using the PIC18F16Q41, it is possible to measure the peak level of an input signal. This feature can be modified to act as fault sensor, using the same principle.
