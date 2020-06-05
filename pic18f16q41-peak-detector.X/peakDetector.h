@@ -12,18 +12,20 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+    
     /**
      *  Peak detecting state machine states
      */
     typedef enum {PK_WAITING = 0, PK_OPEN, PK_RUNNING, PK_DONE} PEAK_STATES;
         
     /**
-     * <b><FONT COLOR=BLUE>void</FONT> setState(<FONT COLOR=BLUE>PEAK_STATES</FONT> state)</B>
+     * <b><FONT COLOR=BLUE>void</FONT> setNextState(<FONT COLOR=BLUE>PEAK_STATES</FONT> state)</B>
      * @param state (PEAK_STATES) - new state machine state
      * 
-     *  This function sets the state of the peak detecting state machine.
+     *  This function sets the next state of the peak detecting state machine.
      */
-    void setState(PEAK_STATES state);
+    void setNextState(PEAK_STATES state);
     
     /**
      * <b><FONT COLOR=BLUE>PEAK_STATES</FONT> getState(<FONT COLOR=BLUE>void</FONT>)</B>
@@ -31,7 +33,14 @@ extern "C" {
      *  This function gets the state of the peak detecting state machine. 
      */
     PEAK_STATES getState(void);
-
+    
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> applyNextState(<FONT COLOR=BLUE>void</FONT>)</B>
+     * 
+     *  This function applies the stored next state to the current state.
+     */
+    void applyNextState(void);
+    
     /**
      * <b><FONT COLOR=BLUE>void</FONT> sendPeakValue(<FONT COLOR=BLUE>void</FONT>)</B>
      * 
@@ -43,20 +52,39 @@ extern "C" {
     void sendPeakValue(void);
 
     /**
-     * <b><FONT COLOR=BLUE>void</FONT> negativeEdgeAction(<FONT COLOR=BLUE>void</FONT>)</B>
+     * <b><FONT COLOR=BLUE>void</FONT> enableNegativeEdge(<FONT COLOR=BLUE>void</FONT>)</B>
      * 
-     *  This function is called by the ISR when the signal falls below the threshold.
-     *  Inside, this function sets up the positive edge events and disables the ADCC.
+     *  This function enables negative edge interrupts for the comparator.
      */
-    void negativeEdgeAction(void);
-
+    void enableNegativeEdge(void);
+    
     /**
-     * <b><FONT COLOR=BLUE>void</FONT> positiveEdgeAction(<FONT COLOR=BLUE>void</FONT>)</B>
+     * <b><FONT COLOR=BLUE>void</FONT> enablePositiveEdge(<FONT COLOR=BLUE>void</FONT>)</B>
      * 
-     *  This function is called by the ISR (or main) when a signal rises above the threshold.
-     *  Inside, this function sets up the negative edge events and enables the ADCC.
+     *  This function enables positive edge interrupts for the comparator.
      */
-    void positiveEdgeAction(void);
+    void enablePositiveEdge(void);
+    
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> disableEdges(<FONT COLOR=BLUE>void</FONT>)</B>
+     * 
+     *  This function disables edge interrupts for the comparator.
+     */
+    void disableEdges(void);
+    
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> updateADCCPeak(<FONT COLOR=BLUE>uint16_t</FONT> value)</B>
+     * 
+     *  This function disables the ADCC, updates the setpoint register to value, then restarts the ADCC.
+     */
+    void updateADCCPeak(uint16_t value);
+    
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> peakDetectorStateMachine(<FONT COLOR=BLUE>void</FONT>)</B>
+     * 
+     *  This function runs the peak detection state machine.
+     */
+    void peakDetectorStateMachine(void);
     
 #ifdef	__cplusplus
 }

@@ -93,15 +93,18 @@ bool CMP1_GetOutputStatus(void)
 }
 
 void CMP1_ISR(void)
-{
+{    
     if (CM1CON1bits.INTP)
     {
-        positiveEdgeAction();
+        setNextState(PK_OPEN); 
     }
-    else
+    else if (CM1CON1bits.INTN)
     {
-        negativeEdgeAction();
+        setNextState(PK_DONE); 
     }
+    
+    disableEdges();
+    
     // Clear the CMP1 interrupt flag
     PIR1bits.C1IF = 0;
 }

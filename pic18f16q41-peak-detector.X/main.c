@@ -56,48 +56,13 @@ void main(void)
     PIR1bits.C1IF = 0;
     
     INTERRUPT_GlobalInterruptEnable(); 
-    
-    // If not above threshold, then startup normally
-    if (!CMP1_GetOutputStatus())
-        setState(PK_WAITING);
-    else
-    {
-        // Threshold is exceeded, run trigger that was skipped
-        setState(PK_OPEN);
-        positiveEdgeAction();
-    }    
+        
+    updateADCCPeak(0x00);
+    ADCC_StartConversion(0x8D);
     
     while (1)
     {
-        if (getState() == PK_OPEN)
-        {
-            // Print the message
-            sendString("Peak Window Open", 1);
-            
-            /*
-             * This is a rare edge case fix.
-             * 
-             * A signal could rise above the level of a trigger
-             * and then fall below the trigger point before the machine
-             * finishes transmitting the message above, causing an improper
-             * state change.
-             */
-            
-            if (getState() != PK_DONE)
-                 setState(PK_RUNNING);
-        }
-        if (getState() == PK_DONE)
-        {
-            // Transmit the peak value found
-            sendPeakValue();
-            
-            // Print the message
-            sendString("Peak Window Closed", 1);
-            END_OF_LINE;
-            
-            // Return the state machine to WAIT
-            setState(PK_WAITING);
-        }
+        peakDetectorStateMachine();
     }
 }
 /**

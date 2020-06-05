@@ -54,14 +54,14 @@
 
 void OPA1_Initialize(void)
 {
-    //GSEL R1 = 15R and R2 = 1R, R2/R1 = 0.07; RESON Disabled; NSS OPA1IN0-; 
-    OPA1CON1 = 0x00;
+    //GSEL R1 = 8R and R2 = 8R, R2/R1 = 1; RESON Enabled; NSS Vss; 
+    OPA1CON1 = 0x3F;
 
-    //NCH No Connection; PCH OPA1IN+; 
-    OPA1CON2 = 0x02;
+    //NCH GSEL; PCH OPA1IN+; 
+    OPA1CON2 = 0x12;
 
-    //FMS No Connection; PSS OPA1IN0+; 
-    OPA1CON3 = 0x00;
+    //FMS OPA1OUT; PSS OPA1IN0+; 
+    OPA1CON3 = 0x80;
 
     //OREN Software Override; HWCH User Defined Feedback; ORPOL Non Inverted; HWCL User Defined Feedback; 
     OPA1HWC = 0x00;
@@ -69,8 +69,8 @@ void OPA1_Initialize(void)
     //ORS LFINTOSC; 
     OPA1ORS = 0x00;    
 
-    //EN Enabled; UG OPA Output; SOC User Defined Feedback; 
-    OPA1CON0 = 0x88;
+    //EN Enabled; UG OPAIN- pin; SOC User Defined Feedback; 
+    OPA1CON0 = 0x80;
 }
 
 inline void OPA1_EnableSoftwareUnityGain(void)

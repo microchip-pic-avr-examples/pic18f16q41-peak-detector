@@ -50,6 +50,7 @@
 
 #include <xc.h>
 #include "adcc.h"
+#include "../peakDetector.h"
 
 /**
   Section: ADCC Module Variables
@@ -81,10 +82,10 @@ void ADCC_Initialize(void)
     ADRPT = 0x00;
     // PCH ANA0; 
     ADPCH = 0x00;
-    // ADACQ 6; 
-    ADACQL = 0x06;
-    // ADACQ 0; 
-    ADACQH = 0x00;
+    // ADACQ 9; 
+    ADACQL = 0x09;
+    // ADACQ 1; 
+    ADACQH = 0x01;
     // CAP Additional uC disabled; 
     ADCAP = 0x00;
     // ADPRE 0; 
@@ -103,10 +104,10 @@ void ADCC_Initialize(void)
     ADREF = 0x03;
     // ADACT disabled; 
     ADACT = 0x00;
-    // ADCS FOSC/2; 
-    ADCLK = 0x00;
-    // ADGO stop; ADFM right; ADON enabled; ADCS Frc; ADCONT enabled; 
-    ADCON0 = 0xD4;
+    // ADCS FOSC/32; 
+    ADCLK = 0x0F;
+    // ADGO stop; ADFM right; ADON enabled; ADCS FOSC/ADCLK; ADCONT enabled; 
+    ADCON0 = 0xC4;
     
 
     // Clear the ADC Threshold interrupt flag
@@ -317,13 +318,10 @@ void ADCC_SetADTIInterruptHandler(void (* InterruptHandler)(void)){
     ADCC_ADTI_InterruptHandler = InterruptHandler;
 }
 void ADCC_DefaultInterruptHandler(void){
-    // Set new max
-    ADCC_DefineSetPoint(ADRES);
     
+    updateADCCPeak(ADRES);
     // Clear threshold flag
     ADSTATbits.UTHR = 0;
-    
-    ADCON0bits.ADGO = 1;
 }
 /**
  End of File
