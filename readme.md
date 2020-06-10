@@ -6,11 +6,11 @@ The operational amplifier (OPA) module, along with a comparator, a digital-to-an
 
 ## Related Documentation
 
-<a href="https://www.microchip.com/wwwproducts/en/PIC18F16Q41">PIC18F16Q41 Product Information</a><br>
 TBxxxx, "Using Operational Amplifiers in PIC16 and PIC18"<br>
 TBxxxx, "Optimizing Internal Operational Amplifiers for Analog Signal Conditioning"<br>
 ANxxxx, "Analog Sensor Measurement and Acquisition"
 
+The above documents will be published soon. They will cover configuring the OPA module and how to best acquire analog signals.
 ## Software Used
 
 * <a href="http://www.microchip.com/mplab/mplab-x-ide">MPLAB® IDE 5.40 or newer</a>
@@ -19,6 +19,7 @@ ANxxxx, "Analog Sensor Measurement and Acquisition"
 
 ## Hardware Used
 
+* <a href="https://www.microchip.com/wwwproducts/en/PIC18F16Q41">PIC18F16Q41 Product Information</a><br>
 * <a href="https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM164137"> Microchip Curiosity Development Board (DM164137) </a>
 * *(Optional)* External Signal Source
 
