@@ -25,7 +25,21 @@ The above documents will be published soon. They will cover configuring the OPA 
 
 ## Setup
 
+#### Wiring
+
+<img src="images/wiring.JPG" alt="wiring image" width="500px" /><br>
+*Wiring Reference Image*
+
+| Wire    | Function
+| ------- | --------
+| Orange  | UART Transmit, 9600 BAUD
+| Green   | Potentiometer Output on Curiosity
+| Blue    | OPA1OUT - Output of the Operational Amplifier
+
+#### Pin Table
+
 <img src="images/diagram.png" alt="schematic" width="500px" /><br>
+*Electrical Schematic*
 
 | Pin | Function
 | --- | --------
@@ -33,11 +47,6 @@ The above documents will be published soon. They will cover configuring the OPA 
 | RC0 | Potentiometer Output on Curiosity
 | RB7 | UART Output, 9600 BAUD
 | RB5 | Signal Input (connect a signal or RC0 to this input)
-
-#### Additional Pins
-
-| Pin | Function
-| --- | --------
 | TX  | Curiosity UART to USB Transmit
 
 ## Operation
