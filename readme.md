@@ -62,7 +62,7 @@ Generally this code example is accurate to about 15mV - the exact accuracy depen
 
 On power-up the program starts in the WAITING state. When the output of the OPA module exceeds the threshold, then the program transitions to the OPEN state. In this state, the program prints the message "Peak Window Open" and moves to RUNNING. If the comparator detects an edge less than the threshold, then the program moves to DONE. In DONE, the program prints the peak value, resets the setpoint in the ADCC, and moves to WAITING.
 
-Because brief events may change the flow of the state machine, this demo uses a next state to current state setup so that asynchronous events write to the next state of the machine, rather than the current state to reduce the chance of unexpected behavior.
+Brief events (such as transient peaks) may change the flow of the state machine by triggering an interrupt at critical times. To prevent state jumping, this code uses a state machine with a future and current event. All state setting events (after initialization) occur to the future event, preventing any changes from occurring to the current state. In addition, interrupts for the comparators are disabled/enabled at key points to reduce the chance of an unexpected state jump. At the end of executing the state machine, the program applies any state changes from future to current. 
 
 ## Signal Inputs
 In the default configuration, the OPA module is configured as a non-inverting amplifier with a gain of 2. The gain can be changed in Microchip Code Configurator (MCC) for both smaller or larger signals.
