@@ -6,9 +6,9 @@ The operational amplifier (OPA) module, along with a comparator, a digital-to-an
 
 ## Related Documentation
 
-TBxxxx, "Using Operational Amplifiers in PIC16 and PIC18"<br>
-TBxxxx, "Optimizing Internal Operational Amplifiers for Analog Signal Conditioning"<br>
-ANxxxx, "Analog Sensor Measurement and Acquisition"
+TBxxxx: Using Operational Amplifiers in PIC16 and PIC18<br>
+TBxxxx: Optimizing Internal Operational Amplifiers for Analog Signal Conditioning<br>
+AN3521: Analog Sensor Measurement and Acquisition<br>
 
 The above documents will be published soon. They will cover configuring the OPA module and how to best acquire analog signals.
 ## Software Used
