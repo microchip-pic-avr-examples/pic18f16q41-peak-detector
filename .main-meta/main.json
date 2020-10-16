@@ -4,10 +4,10 @@
     "content": {
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f16q41-peak-detector",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "displayName": "Windowed Peak Detector with PIC18F16Q41",
         "projectName": "pic18f16q41-peak-detector",
-        "shortDescription": "PIC18F16Q41 Windowed Peak Detector",
+        "shortDescription": "PIC18F16Q41 - Windowed Peak Detector",
         "ide": {
             "name": "MPLABX",
             "semverRange": ">=5.40.0"

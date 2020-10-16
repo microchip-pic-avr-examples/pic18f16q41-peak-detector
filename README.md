@@ -6,9 +6,9 @@ The operational amplifier (OPA) module, along with a comparator, a digital-to-an
 
 ## Related Documentation
 
-TBxxxx: Using Operational Amplifiers in PIC16 and PIC18<br>
-TBxxxx: Optimizing Internal Operational Amplifiers for Analog Signal Conditioning<br>
-AN3521: Analog Sensor Measurement and Acquisition<br>
+[TB3280: Using Operational Amplifiers in PIC16 and PIC18](http://ww1.microchip.com/downloads/en/DeviceDoc/Using-the-Operational-Amplifier-on-PIC16-and-PIC18-90003280A.pdf)  
+[TB3279: Optimizing Internal Operational Amplifiers for Analog Signal Conditioning](http://ww1.microchip.com/downloads/en/DeviceDoc/Optimizing-Internal-Operational-Amplifiers-for-Analog-Signal-Conditioning-90003279A.pdf)  
+[AN3521: Analog Sensor Measurement and Acquisition](http://www.microchip.com/wwwappnotes/appnotes.aspx?appnote=en1002264)  
 
 ## Software Used
 
