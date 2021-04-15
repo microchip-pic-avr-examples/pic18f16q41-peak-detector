@@ -4,20 +4,20 @@
     "content": {
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f16q41-peak-detector",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "displayName": "Windowed Peak Detector with PIC18F16Q41",
         "projectName": "pic18f16q41-peak-detector",
         "shortDescription": "PIC18F16Q41 - Windowed Peak Detector",
         "ide": {
-            "name": "MPLABX",
+            "name": "MPLAB X",
             "semverRange": ">=5.40.0"
         },
         "compiler": [
-			{
-				"name": "XC8",
-				"semverRange": "^2.20.0"
-			}
-		],
+            {
+                "name": "XC8",
+                "semverRange": "^2.20.0"
+            }
+        ],
         "dfp": {
             "name": "PIC18F-Q_DFP",
             "semverRange": "^1.5.124"
@@ -40,42 +40,52 @@
         "subcategories": [
             "MCC",
             [
-               "Peripherals", "OPA"
+                "Peripherals",
+                "OPA"
             ],
             [
-               "Peripherals", "ADCC"
+                "Peripherals",
+                "ADCC"
             ],
             [
-               "Peripherals", "CMP"
+                "Peripherals",
+                "CMP"
             ],
             [
-               "Peripherals", "DAC"
+                "Peripherals",
+                "DAC"
             ],
             [
-               "Peripherals", "FVR"
+                "Peripherals",
+                "FVR"
             ],
             [
-               "Peripherals", "UART"
+                "Peripherals",
+                "UART"
             ]
         ],
         "peripherals": [
-            "OPA", "UART","CMP", "DAC", "FVR"
+            "OPA",
+            "UART",
+            "CMP",
+            "DAC",
+            "FVR"
         ],
         "keywords": [
             "MCC",
             "Sensor",
             "Intelligent Analog"
         ],
-		"additionalData": {
-			"longDescription": {
-				"metaDataVersion": "1.0.0",
-				"category": "com.microchip.portal.fileRef",
-				"content": {
-					"metaDataVersion": "1.0.0",
-					"fileName": "./README.md",
-					"mimeType": "text/markdown"
-				}
-			}
-		}
-	}
+        "additionalData": {
+            "longDescription": {
+                "metaDataVersion": "1.0.0",
+                "category": "com.microchip.portal.fileRef",
+                "content": {
+                    "metaDataVersion": "1.0.0",
+                    "fileName": "./README.md",
+                    "mimeType": "text/markdown"
+                }
+            }
+        }
+    }
 }
